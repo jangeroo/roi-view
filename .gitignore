@@ -5,6 +5,8 @@
 
 # testing
 /coverage
+/venv
+geckodriver.log
 
 # production
 /build
