@@ -1,12 +1,12 @@
-# -- FILE: features/environment.py
 from behave import use_fixture
 
 from fixtures import splinter_browser
+# from features.gui_steps.gui_world import App
 
 
 def before_all(context):
     use_fixture(splinter_browser, context)
-# -- HINT: CLEANUP-FIXTURE is performed after after_all() hook is called.
+    # context.app = App(context)
 
 
 def before_scenario(context, scenario):

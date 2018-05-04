@@ -1,16 +1,21 @@
-@given('ROI viewer is running')
-def step_impl(context):
-    print(f'starting app...\n')
+from features.steps.default_world import App
 
 
-@when('I open \'http://localhost:3000\'')
-def step_impl(context):
-    print(f'opening localhost:3000\n')
+@given('{app_title} is running')
+def step_impl(context, app_title):
+    context.app_title = app_title
+    context.app = App(context)
 
 
-@then('I should see the title \'{expected}\'')
-def step_impl(context, expected):
-    print(f'verifying title\n')
+@when('I open \'{url}\'')
+def step_impl(context, url):
+    context.app.open_app_at(url)
+
+
+@then('I should see the title \'{title}\'')
+def step_impl(context, title):
+    actual = context.app.get_title()
+    assert actual == title
 
 
 @then('I should see a percent-sign logo')

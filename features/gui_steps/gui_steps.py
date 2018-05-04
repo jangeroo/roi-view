@@ -1,19 +1,21 @@
-@given('ROI viewer is running')
-def step_impl(context):
-    print(f'starting app...\n')
+from features.gui_steps.gui_world import App
 
 
-@when('I open \'http://localhost:3000\'')
-def step_impl(context):
-    print(f'opening localhost:3000\n')
-    context.browser.visit('http://localhost:3000')
+@given('{app_title} is running')
+def step_impl(context, app_title):
+    context.app_title = app_title
+    context.app = App(context)
 
 
-@then('I should see the title \'{expected}\'')
-def step_impl(context, expected):
-    print(f'verifying title\n')
-    title = context.browser.find_by_css('.App-title').text
-    assert title == expected
+@when('I open \'{url}\'')
+def step_impl(context, url):
+    context.app.open_app_at(url)
+
+
+@then('I should see the title \'{title}\'')
+def step_impl(context, title):
+    actual = context.app.get_title()
+    assert actual == title
 
 
 @then('I should see a percent-sign logo')
