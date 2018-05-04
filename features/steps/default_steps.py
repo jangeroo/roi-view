@@ -1,10 +1,6 @@
-from features.steps.default_world import App
-
-
 @given('{app_title} is running')
 def step_impl(context, app_title):
     context.app_title = app_title
-    context.app = App(context)
 
 
 @when('I open \'{url}\'')
